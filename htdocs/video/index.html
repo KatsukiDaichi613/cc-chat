@@ -1,0 +1,230 @@
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex">
+  <title>ビデオ通話実験/CCチャット</title>
+
+  <!--  stylesheet-->
+  <link rel="stylesheet" type="text/css" href="css/video_reset.css">
+  <link rel="stylesheet" type="text/css" href="css/video.css">
+
+  <!--  script-->
+
+  <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+
+</head>
+
+
+<body>
+  <header>
+    <h1>CC-CHAT</h1>
+    <button id="audiomute"><img src="img/icon_audio.png"></button>
+    <button id="videomute"><img src="img/icon_video.png"></button>
+    <button id="settingOpen"><img src="img/icon_gia.png"></button>
+    <div id="nowUserSetting">
+      <p class="now-group-mode"></p>
+    </div>
+    <div id="grantSetting" style="display: none;">
+      <button id="TEST"></button>
+      <p>G</p>
+      <select name="group-mode" id="group-mode">
+        <option value="O">----</option>
+        <option value="A">1_全員通話式</option>
+        <option value="C">2_シンボル式</option>
+        <option value="D">3_距離式</option>
+        <option value="B">4_方向式</option>
+      </select>
+      <p>T</p>
+      <select name="test-mode" id="test-mode">
+        <option value="0">テスト無し</option>
+        <!--
+        <option value="10">テスト1-U</option>
+        <option value="11">テスト1-1</option>
+        <option value="12">テスト1-2</option>
+        <option value="13">テスト1-3</option>
+        <option value="14">テスト1-4</option>
+        <option value="19">テスト1-P</option>
+-->
+        <option value="20">テスト2-U</option>
+        <option value="21">テスト2-1</option>
+        <option value="22">テスト2-2</option>
+        <option value="23">テスト2-3</option>
+        <option value="24">テスト2-4</option>
+        <option value="29">テスト2-P</option>
+      </select>
+      <button id="removeUser">R</button>
+      <input name="test-form" id="test-form" placeholder="remove">
+    </div>
+    <input name="grant-form" id="grant-form" placeholder="command">
+  </header>
+
+  <div class="pure-g">
+
+    <!--groups-->
+    <div class="pure-u-2-3 Room-wrap" id="video-container" data-video="I" data-group="O">
+
+      <div class="bg"></div>
+
+      <div id="ShadowB" class="group-style">
+        <div class="self-rangeB3" id="my-rangeB3"></div>
+        <div class="self-rangeB" id="my-rangeB"></div>
+        <p>
+          <strong>方向式（操作方法と解説）</strong><br>
+          任意の場所を右クリックでその場所を見つめます。<br>
+          自分の向いている方向にいるユーザーとトークできます。<br>
+          また、自分の方を見ているユーザーともトークできます
+        </p>
+      </div>
+      <div id="ShadowD" class="group-style">
+        <div class="self-rangeD3" id="my-rangeD3"></div>
+        <div class="self-rangeD" id="my-rangeD"></div>
+        <p>
+          <strong>距離式（操作方法と解説）</strong><br>
+          自分の近くのユーザーとより良くトークできます。
+        </p>
+      </div>
+      <div id="mark-wrap" class="group-style">
+        <p>
+          <strong>シンボル式（操作方法と解説）</strong><br>
+          シンボルの近くのユーザーとのみ、トークできます。
+        </p>
+      </div>
+
+      <div id="zoom" class="group-style">
+        <p>
+          <strong>全員通話式（操作方法と解説）</strong><br>
+          どこにいても全ユーザーとトークできます。
+        </p>
+      </div>
+
+      <div id="default-wrap" class="group-style">
+        <p>
+          <strong>（操作方法と解説）</strong><br>
+          自分のアイコンをドラッグアンドドロップで移動できます。<br>
+        </p>
+      </div>
+
+      <!--
+        <audio id="m0" class="introMusic" src="src/sample0.mp3"></audio>
+        <audio id="m1" class="introMusic" src="src/sample1.mp3"></audio>
+        <audio id="m2" class="introMusic" src="src/sample2.mp3"></audio>
+        <audio id="m3" class="introMusic" src="src/sample3.mp3"></audio>
+        <audio id="m4" class="introMusic" src="src/sample4.mp3"></audio>
+-->
+      <audio class="bell" src="src/bell.mp3"></audio>
+      <audio id="testStart" src="src/testStart.mp3"></audio>
+
+      <div id="test2">
+        <div class="timer">0:00</div>
+        <div class="record"><button name="record">録音解析開始</button>　※指示があるまで押さない</div>
+        <div class="test2-lead">
+          <a href="https://forms.gle/sWLQH7CTmtFeFYPq5" target="_blank">実験アンケート<br><img src="img/test3.png"><br>※スマホ推奨</a>
+        </div>
+        <div class="voice"></div>
+      </div>
+
+      <!--videos-->
+
+      <div id="my-videos">
+
+        <div class="local_wrap video_wrap drag-and-drop myVideoID" id="myVideoID" data-group="0" data-task="A" data-user="a" data-icon="0" style="top: 250px; left: 250px;">
+          <div class="style-eye" id="my-eye"></div>
+          <div class="video-clip my-clip">
+            <video id="my-video" class="local-video style-video" autoplay playsinline muted></video>
+            <label class="icon-label my-label">name</label>
+            <label class="side-label">name</label>
+          </div>
+        </div>
+      </div>
+
+      <div id="their-videos"></div>
+    </div>
+
+    <div class="Manager-wrap">
+      <div class="currentTime"></div>
+      <p class="manager-memo">memo:<br>
+      </p>
+    </div>
+
+    <!-- Steps -->
+    <div class="pure-u-1-3 Setting-wrap">
+      <div class="select">
+        <label for="audioSource">サウンドソース: </label><select id="audioSource"></select>
+      </div>
+
+      <div class="select">
+        <label for="videoSource">ビデオソース: </label><select id="videoSource"></select>
+      </div>
+
+      <!-- Get local audio/video stream -->
+      <div id="step1">
+        <p class="red">カメラとマイクを許可してください</p>
+        <div id="step1-error">
+          <p class="red">カメラとマイクへのアクセスに失敗しました</p>
+          <a href="#" class="pure-button pure-button-error" id="step1-retry">Try again</a>
+        </div>
+      </div>
+
+      <p>あなたのID: <span id="my-id">...</span></p>
+
+      <!-- Make calls to others -->
+      <div id="step2">
+        <h3>ユーザーネーム/部屋</h3>
+        <form id="make-call" class="pure-form">
+          <input type="text" placeholder="userName（英字）" id="user-name" class="m10">
+          <input type="text" placeholder="roomCode（英字）" id="join-room" class="m10">
+          <button id="in-room" class="pure-button pure-button-success m10" type="submit">入室</button>
+        </form>
+        <p><strong>注意：</strong>指定されたroomCodeを入力してください。userNameは半角アルファベット10文字以内で入力してください。</p>
+      </div>
+
+      <!-- Call in progress -->
+      <div id="step3">
+        <p>部屋名：<span id="room-id">...</span></p>
+        <p><a href="#" class="pure-button pure-button-error" id="end-call">退出</a></p>
+      </div>
+
+      <div id="output"></div>
+
+      <div id="icons">
+        <p>あなたのアイコン</p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- script -->
+
+  <script type="text/javascript" src="js/global.js"></script>
+  
+  
+  <!--  video-->
+
+  <script type="text/javascript" src="//cdn.webrtc.ecl.ntt.com/skyway-latest.js"></script>
+
+  <!-- chat -->
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-database.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-analytics.js"></script>
+  
+  <!-- script -->
+  <script type="text/javascript" src="js/key.js"></script>
+  <script type="text/javascript" src="js/video.js"></script>
+
+  <script type="text/javascript" src="js/chat.js"></script>
+  <script type="text/javascript" src="js/drag.js"></script>
+  <script type="text/javascript" src="js/grouping.js"></script>
+  <script type="text/javascript" src="js/volume.js"></script>
+  <script type="text/javascript" src="js/ready.js"></script>
+
+</body>
+
+</html>

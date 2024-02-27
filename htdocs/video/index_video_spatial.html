@@ -1,0 +1,112 @@
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <title>ビデオチャットツールテスト</title>
+
+  <!--  stylesheet-->
+  <link rel="stylesheet" type="text/css" href="css/video_reset.css">
+  <link rel="stylesheet" type="text/css" href="css/video.css">
+
+  <!--  script-->
+</head>
+
+<body>
+
+  <div class="pure-g">
+
+    <!-- Video area -->
+    <div class="pure-u-2-3" id="video-container">
+      <div id="their-videos">
+      </div>
+      <div id="my-videos">
+<!--        <div class="local_wrap" id="">-->
+        <div class="local_wrap video_wrap drag-and-drop" id="">
+          <video id="my-video" class="local-video style-video" muted="true" autoplay playsinline></video>
+          <label></label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Steps -->
+    <div class="pure-u-1-3">
+      <h2>SkyWay Video Chat</h2>
+
+      <div class="select">
+        <label for="audioSource">サウンドソース: </label><select id="audioSource"></select>
+      </div>
+
+      <div class="select">
+        <label for="videoSource">ビデオソース: </label><select id="videoSource"></select>
+      </div>
+      
+      <div>
+        <button class="audiomute"></button>   
+        <button class="videomute"></button>  
+      </div>
+
+      <!-- Get local audio/video stream -->
+      <div id="step1">
+        <p>Please click `allow` on the top of the screen so we can access your webcam and microphone for calls.</p>
+        <div id="step1-error">
+          <p>Failed to access the webcam and microphone. Make sure to run this demo on an http server and click allow when asked for permission by the browser.</p>
+          <a href="#" class="pure-button pure-button-error" id="step1-retry">Try again</a>
+        </div>
+      </div>
+
+      <p>Your ID: <span id="my-id">...</span></p>
+
+      <!-- Make calls to others -->
+      <div id="step2">
+        <h3>部屋</h3>
+        <form id="make-call" class="pure-form">
+          <input type="text" placeholder="roomCode" id="join-room">
+          <button class="pure-button pure-button-success" type="submit">入室</button>
+        </form>
+        <p><strong>注意：</strong>同じルーム名を使用した場合、知らない人と接続する可能性があります。</p>
+      </div>
+
+      <!-- Call in progress -->
+      <div id="step3">
+        <p>部屋名：<span id="room-id">...</span></p>
+        <p><a href="#" class="pure-button pure-button-error" id="end-call">退出</a></p>
+      </div>
+      
+      <div id="output"></div>
+
+    </div>
+  </div>
+
+  <!-- script -->
+  <script type="text/javascript" src="js/global.js"></script>
+  
+<!--  video-->
+<!--  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
+  <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+  
+  <script type="text/javascript" src="//cdn.webrtc.ecl.ntt.com/skyway-latest.js"></script>
+  <script type="text/javascript" src="js/key.js"></script>
+  <script type="text/javascript" src="js/video.js"></script>
+  
+  
+<!-- chat -->
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-database.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-analytics.js"></script>
+  
+  <script type="text/javascript" src="js/chat.js"></script>
+
+
+<!--  drag-->
+  <script type="text/javascript" src="js/drag2.js"></script>
+    <!-- script -->
+  
+</body>
+
+</html>

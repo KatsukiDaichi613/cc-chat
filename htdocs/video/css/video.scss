@@ -1,0 +1,753 @@
+$iconLength: 100px;
+$shadowLength: 200px;
+$B_shadowLength: 300px;
+
+*,
+*:before,
+*:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/*------------------*/
+header {
+  z-index: 999;
+  width: 100%;
+  height: 50px;
+  padding: 5px;
+  background-color: #555;
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  display: flex;
+  align-items: center;
+
+  h1 {
+    display: block;
+    line-height: 1;
+    font-size: 20px;
+    color: #fff;
+  }
+
+  button {
+    line-height: 1;
+    display: block;
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    border: none;
+    margin-left: 15px;
+    padding: 0;
+
+    img {
+      width: 20px;
+      height: 20px;
+      border-radius: 10px;
+    }
+
+    /*------------------*/
+    &.off {
+      position: relative;
+    }
+
+    &.off::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: inherit;
+      height: inherit;
+      background: url(../img/icon_off.png);
+      background-size: cover;
+    }
+  }
+
+  input {
+    margin-left: 15px;
+    line-height: 14px;
+    font-size: 14px;
+    height: 20px;
+    width: 80px;
+  }
+
+  #grantSetting,
+  #nowUserSetting {
+    display: flex;
+    align-items: center;
+
+    p {
+      display: block;
+      line-height: 1;
+      font-size: 15px;
+      color: #fff;
+      margin-left: 15px;
+      margin-right: 5px;
+    }
+
+    select {
+      width: 120px;
+      height: 20px;
+      background-color: #eee;
+    }
+
+  }
+}
+
+footor {
+  z-index: 999;
+}
+
+/*------------------*/
+.pure-g {
+  width: 1200px;
+  height: 800px;
+
+  display: block;
+
+  .bg {
+    background: url(../img/bg_test.png);
+    width: 1200px;
+    height: 800px;
+    opacity: 0.1;
+    display: block;
+  }
+
+  .Room-wrap {
+    text-align: center;
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  > .Setting-wrap {
+    position: fixed;
+    width: 50%;
+    top: 50px;
+    right: 0;
+    padding: 50px;
+    height: 100%;
+    background-color: antiquewhite;
+    z-index: 900;
+
+    p {
+      margin: 8px 0;
+      line-height: 1.4;
+    }
+  }
+
+  > .Manager-wrap {
+    position: fixed;
+    width: 300px;
+    top: 50px;
+    left: 0;
+    padding: 50px 5px;
+    height: 100%;
+    background-color: antiquewhite;
+    z-index: 900;
+
+    p.screenUser {
+      margin: 8px 0;
+      line-height: 1.4;
+      letter-spacing: 0;
+    }
+
+    p.manager-memo {
+      margin: 8px 0;
+      font-size: 10px;
+      line-height: 1.4;
+      letter-spacing: 0;
+    }
+
+    .currentTime {
+      font-size: 20px;
+      background-color: #fff;
+      letter-spacing: 0;
+
+    }
+  }
+}
+
+
+/*------------------*/
+
+#video-container {
+  .group-style {
+    display: none;
+
+    p {
+      display: block;
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      line-height: 1.4;
+      font-size: 20px;
+      margin: 0;
+      text-align: right;
+      padding: 10px;
+
+      span {
+        font-size: 50px;
+      }
+
+      strong {
+        font-weight: bold;
+      }
+    }
+  }
+
+  /*-----*/
+  &[data-group="O"] {
+    #default-wrap {
+      display: block;
+    }
+  }
+
+  &[data-group="A"] {
+    #zoom {
+      display: block;
+    }
+  }
+
+  &[data-group="B"] {
+    #ShadowB {
+      display: block;
+
+      .self-rangeB {
+
+        $B_shadowLength_L: 10*40px;
+        $B_shadowLength_S: 6*40px;
+        width: 0px;
+        height: 0px;
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform-origin: center center;
+        transform: rotate(0deg);
+
+        &::after {
+          content: "";
+          width: $B_shadowLength_L;
+          height: $B_shadowLength_S;
+          position: absolute;
+          top: -120px;
+          left: -40px;
+          opacity: 0.2;
+          background-image: url(../img/circle_blue.png);
+          background-size: 100% 100%;
+          background-repeat: no-repeat;
+          
+          display: none;
+        }
+
+        &#my-rangeB::after {
+          background-image: url(../img/circle_red.png);
+          display: block;
+        }
+      }
+
+      .self-rangeB3 {
+        content: "";
+        display: block;
+        width: 600px;
+        height: 600px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: 300px;
+        //        background-color: #f00;
+        background: radial-gradient(#f00f, #f000);
+        opacity: 0.2;
+        
+        display: none;
+      }
+    }
+
+  }
+
+  /*-----*/
+  &[data-group="C"] {
+    #mark-wrap {
+      display: block;
+
+      .local-mark {
+        position: absolute;
+        //      border-width: 5px;
+        //      border-style: solid;
+        border-radius: 50px;
+
+        img {
+          width: 100%;
+        }
+      }
+
+      .local-mark-bg {
+        position: absolute;
+        //      border-width: 5px;
+        //      border-style: solid;
+        border-radius: 150px;
+        opacity: 0.5;
+      }
+    }
+  }
+
+  &[data-group="D"] {
+    #ShadowD {
+      display: block;
+
+      .self-rangeD {
+        $D_shadowLength: 400px;
+        width: 0px;
+        height: 0px;
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform-origin: center center;
+
+
+        &::after {
+          content: "";
+          width: $D_shadowLength;
+          height: $D_shadowLength;
+          position: absolute;
+          top: -200px;
+          left: -200px;
+          opacity: 0.2;
+          background-image: url(../img/circle_blue.png);
+          background-size: 100% 100%;
+          background-repeat: no-repeat;
+          
+          display: none;
+        }
+
+        &#my-rangeD::after {
+          background-image: url(../img/circle_red.png);
+          display: block;
+        }
+      }
+
+      .self-rangeD3 {
+        content: "";
+        display: block;
+        width: 600px;
+        height: 600px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: 300px;
+        //        background-color: #f00;
+        background: radial-gradient(#f00f, #f000);
+        opacity: 0.2;
+      }
+    }
+  }
+
+  /*-----*/
+
+  /*-----*/
+
+  #test2 {
+
+    .test2-lead {
+      p {
+        position: fixed;
+        top: 70px;
+        left: 20px;
+        font-size: 14px;
+        line-height: 1.4;
+        z-index: 500;
+        background-color: #fffc;
+        text-align: left;
+
+        span {
+          font-weight: bold;
+        }
+      }
+
+      a {
+        position: fixed;
+        top: 150px;
+        left: 20px;
+        font-size: 14px;
+        text-align: center;
+        text-decoration: none;
+
+        img {
+          width: 120px;
+          height: 120px;
+        }
+      }
+    }
+
+    .voice {
+      width: 50px;
+      height: 50px;
+      background-image: url(../img/mega.jpg);
+      background-size: cover;
+      position: fixed;
+      top: 70px;
+      right: 20px;
+      opacity: 0.2;
+
+      &.say {
+        opacity: 1;
+      }
+    }
+
+    .record {
+      position: fixed;
+      top: 70px;
+      left: 20px;
+    }
+  }
+
+  .timer {
+    position: fixed;
+    top: 70px;
+    left: 20px;
+    font-size: 30px;
+    background-color: #fff;
+    padding: 5px;
+
+    p {
+      display: block;
+      font-size: 15px;
+    }
+  }
+
+  /*-----*/
+
+  // 配列 
+  $colors: #ff0000,
+  #00ff00,
+  #0000ff,
+  #ffff00,
+  #ff00ff,
+  #00ffff,
+  #ff8800,
+  #8800ff,
+  #00ff88,
+  #ff0088,
+  #88ff00,
+  #0088ff;
+
+  @each $value in $colors {
+    $key: index($colors, $value);
+
+    .video_wrap[data-group="#{$key}"] .video-clip,
+    .local-space[data-group="#{$key}"] {
+      border-color: #{nth($colors, $key)};
+    }
+
+    .video_wrap[data-group="#{$key}"] .style-eye,
+    .local-mark[data-group="#{$key}"],
+    .local-mark-bg[data-group="#{$key}"] {
+      background-color: #{nth($colors, $key)};
+    }
+  }
+
+  .video_wrap[data-group="0"] .video-clip,
+  .video_wrap[data-group="0"],
+  .local-space[data-group="0"] {
+    border-color: #000000;
+  }
+
+  .video_wrap[data-group="0"] .style-eye,
+  .local-mark[data-group="0"],
+  .local-mark-bg[data-group="0"] {
+    background-color: #000000;
+  }
+
+  //////////////////////////////////////////////////////////
+  &[data-video="I"] {
+    .video_wrap {
+      display: block;
+      position: absolute;
+      border-radius: $iconLength /2;
+      width: $iconLength;
+      height: $iconLength;
+      background-color: #000;
+
+      &:not([ID]) {
+        display: none;
+      }
+
+      &[data-task="B"]:hover {
+        opacity: 0.2;
+      }
+
+    }
+    
+    
+    .video-clip {
+      border-radius: $iconLength /2;
+      width: $iconLength;
+      height: $iconLength;
+      border-width: 5px;
+      border-style: solid;
+      overflow: hidden;
+      position: relative;
+
+      &.my-clip {
+        border-style: double;
+      }
+    }
+
+    .icon-label {
+      position: absolute;
+      bottom: 0px;
+      left: 0px;
+      background-color: #fff9;
+      text-align: center;
+      width: 100%;
+
+      &.my-label {
+        background-color: #0009;
+        color: #fff;
+      }
+    }
+
+    .side-label {
+      display: none;
+    }
+
+    .style-video {
+      display: block;
+      width: inherit;
+      height: inherit;
+
+      width: $iconLength * 2;
+      height: $iconLength;
+      transform: translate(-1 * $iconLength /2, 0px);
+
+      &.mute {
+        opacity: 0.6;
+      }
+
+      &.local-video {
+        transform: translate(-1 * $iconLength /2, 0px) scale(-1, 1);
+      }
+
+    }
+
+    .style-eye {
+      display: none;
+    }
+
+    &[data-group="B"] {
+      .style-eye {
+        display: block;
+        width: $iconLength/2;
+        height: $iconLength/2;
+        position: absolute;
+        top: $iconLength/2;
+        left: $iconLength/2;
+        transform-origin: top left;
+        transform: rotate(0deg);
+      }
+    }
+
+    #self-bgB {}
+
+    #group-videos {
+      display: none;
+    }
+    
+    
+    
+    
+      @for $i from 0 through 16 {
+        .video_wrap[data-icon="#{$i}"] .video-clip{
+          background-image: url(../img/icon_A/animal_mark#{$i}.png);
+          background-size: cover;
+          background-repeat: no-repeat;
+        }
+      }
+  }
+
+  //////////////////////////////////////////////////////////
+  //  &[data-video="S"] {
+  //
+  //    .video_wrap {
+  //      display: block;
+  //      position: absolute;
+  //      border-radius: 50px;
+  //      width: 100px;
+  //      height: 100px;
+  //
+  //      background-image: url(../img/bg_default.png);
+  //      background-size: contain;
+  //      background-position: center;
+  //
+  //
+  //      &:not([ID]) {
+  //        display: none;
+  //      }
+  //    }
+  //
+  //
+  //    .video-clip {
+  //      border-radius: 50px;
+  //      width: 100px;
+  //      height: 100px;
+  //      border-width: 5px;
+  //      border-style: solid;
+  //      overflow: hidden;
+  //      position: relative;
+  //    }
+  //
+  //
+  //    .icon-label {
+  //      display: block;
+  //      position: absolute;
+  //      bottom: 0px;
+  //      left: 0px;
+  //      background-color: #fff;
+  //      text-align: center;
+  //      width: 100%;
+  //    }
+  //
+  //    .side-label {
+  //      display: block;
+  //      position: fixed;
+  //      top: 170px;
+  //      left: 20px;
+  //      background-color: #fff6;
+  //      z-index: 510;
+  //      width: 140px;
+  //      height: 25px;
+  //    }
+  //
+  //    @for $i from 0 through 16 {
+  //      .video_wrap[data-icon="#{$i}"] {
+  //        background-image: url(../img/icon_A/animal_mark#{$i}.png);
+  //      }
+  //    }
+  //
+  //    .style-video {
+  //      display: block;
+  //
+  //      width: inherit;
+  //      height: inherit;
+  //
+  //      clip: rect(0px 190px 135px 50px);
+  //      width: 240px;
+  //      height: 135px;
+  //
+  //      background-color: #000;
+  //      position: fixed;
+  //      top: 60px;
+  //      left: 10px;
+  //      z-index: 500;
+  //
+  //      &.mute {
+  //        display: none;
+  //      }
+  //
+  //      &.local-video {
+  //        transform: scale(-1, 1);
+  //
+  //      }
+  //    }
+  //
+  //    #side-videos-bg {
+  //      width: 100%;
+  //      height: 155px;
+  //      position: fixed;
+  //      top: 50px;
+  //      left: 0;
+  //      background-color: #0006;
+  //      z-index: 490;
+  //    }
+  //  }
+
+  //////////////////////////////////////////////////////////
+
+
+  .remote-wrap .remote-video {}
+
+  .local_wrap span,
+  .remote-wrap span {
+    display: block;
+  }
+}
+
+
+#icons {
+  display: flex;
+  width: 360px;
+  flex-wrap: wrap;
+
+  p {
+    display: block;
+    width: 100%;
+    font-size: 16px;
+  }
+
+  .select-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+
+    background-size: contain;
+    background-position: center;
+
+    cursor: pointer;
+
+    &.set {
+      border: 3px solid #f00;
+    }
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+
+  @for $i from 0 through 16 {
+    .select-icon[data-icon="#{$i}"] {
+      background-image: url(../img/icon_A/animal_mark#{$i}.png);
+    }
+  }
+}
+
+
+
+
+#audioSource,
+#videoSource {
+  display: block;
+  min-height: 2em;
+}
+
+/*------------------*/
+#step1-error,
+#step2,
+#step3 {
+  display: none;
+}
+
+#my-id {
+  font-weight: bold;
+}
+
+.m10 {
+  margin-top: 10px;
+}
+
+.red {
+  color: #f00;
+}
+
+/*drag-and-drop------------------*/
+
+.drag-and-drop {
+  cursor: move;
+  z-index: 777;
+}
+
+/*------------------drag-and-drop*/
+
+/*------------------*/

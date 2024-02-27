@@ -1,0 +1,160 @@
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <title>ビデオチャットツールテスト</title>
+
+  <!--  stylesheet-->
+  <link rel=" stylesheet" type="text/css" href="css/video_reset.css">
+  <link rel=" stylesheet" type="text/css" href="css/video.css">
+  <link rel="stylesheet" type="text/css" href="css/test.css">
+
+
+  <!--  script-->
+
+  <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+</head>
+
+  
+  
+  
+<body>
+  <header>
+    <h1>CC-CHAT</h1>
+    <button id="audiomute"><img src="img/icon_audio.png"></button>
+    <button id="videomute"><img src="img/icon_video.png"></button>
+    <button id="settingOpen"><img src="img/icon_gia.png"></button>
+    <button id="TEST"></button>
+    <div id="nowUserSetting">
+      <p class="now-group-mode"></p>
+      <p class="now-video-mode"></p>
+    </div>
+    <div id="grantSetting" style="display: none;">
+      <p>グルーピングタイプ</p>
+      <select name="group-mode" id="group-mode">
+        <option value="O">グループ化無し</option>
+        <option value="A">群れ式</option>
+        <option value="B">机着席式</option>
+        <option value="C">シンボル式</option>
+        <option value="D">近距離式</option>
+      </select>
+      <p>映像タイプ</p>
+      <select name="video-mode" id="video-mode">
+        <option value="I">アイコン式</option>
+        <option value="S">サイド式</option>
+      </select>
+    </div>
+    <input name="grant-form" id="grant-form" placeholder="command">
+  </header>
+
+  <div class="pure-g">
+
+    <!--groups-->
+    <div class="pure-u-2-3 Room-wrap" id="video-container" data-video="I">
+
+      <div id="self-bg" class="group_modeD" style="display: none;">
+        <div class="self-range"></div>
+      </div>
+
+      <div id="mark-wrap" class="group_modeC" style="display: none;"></div>
+
+      <div id="space-wrap" class="group_modeB" style="display: none;"></div>
+
+      <div id="videos-bg" class="group_modeA" style="display: none;">
+        <div class="icon_group" data-user="a" data-group="0" id="bg_myVideoID"></div>
+      </div>
+
+      <div id="default-wrap" class="group_modeO">
+      <p>こんにちは。CC-CHATへようこそ！</p>
+      </div>
+      
+    <!--videos-->
+      
+      <div id="side-videos-bg"></div>
+
+      <div id="my-videos">
+
+        <div class="local_wrap video_wrap drag-and-drop myVideoID" id="myVideoID" data-group="0" data-user="a" data-icon="0" style="top: 250px; left: 250px;">
+          <video id="my-video" class="local-video style-video" autoplay playsinline muted></video>
+          <label>name</label>
+          <label class="side-label">name</label>
+        </div>
+
+      </div>
+
+      <div id="their-videos"></div>
+    </div>
+
+
+
+
+    <!-- Steps -->
+    <div class="pure-u-1-3 Setting-wrap">
+      <div class="select">
+        <label for="audioSource">サウンドソース: </label><select id="audioSource"></select>
+      </div>
+
+      <div class="select">
+        <label for="videoSource">ビデオソース: </label><select id="videoSource"></select>
+      </div>
+
+      <!-- Get local audio/video stream -->
+      <div id="step1">
+        <p class="red">カメラとマイクを許可してください</p>
+        <div id="step1-error">
+          <p class="red">カメラとマイクへのアクセスに失敗しました</p>
+          <a href="#" class="pure-button pure-button-error" id="step1-retry">Try again</a>
+        </div>
+      </div>
+
+      <p>あなたのID: <span id="my-id">...</span></p>
+
+      <!-- Make calls to others -->
+      <div id="step2">
+        <h3>ユーザーネーム/部屋</h3>
+        <form id="make-call" class="pure-form">
+          <input type="text" placeholder="userName（英字）" id="user-name" class="m10">
+          <input type="text" placeholder="roomCode（英字）" id="join-room" class="m10">
+          <button class="pure-button pure-button-success m10" type="submit">入室</button>
+        </form>
+        <p><strong>注意：</strong>同じルーム名を使用した場合、知らない人と接続する可能性があります。</p>
+      </div>
+
+      <!-- Call in progress -->
+      <div id="step3">
+        <p>部屋名：<span id="room-id">...</span></p>
+        <p><a href="#" class="pure-button pure-button-error" id="end-call">退出</a></p>
+      </div>
+
+      <div id="output"></div>
+      
+      <div id="icons">
+        <p>あなたのアイコン</p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- script -->
+
+
+  <script type="text/javascript" src="js/global.js"></script>
+  <script type="text/javascript" src="js/key.js"></script>
+  <script type="text/javascript" src="js/video.js"></script>
+  <!--  <script type="text/javascript" src="js/chat.js"></script>-->
+  <script type="text/javascript" src="js/drag.js"></script>
+  <script type="text/javascript" src="js/grouping.js"></script>
+  <script type="text/javascript" src="js/ready.js"></script>
+
+  <!-- script -->
+  <script>
+    step = 3;
+    TEST = 1;
+
+  </script>
+
+</body>
+
+</html>

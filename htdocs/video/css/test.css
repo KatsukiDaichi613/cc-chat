@@ -1,0 +1,74 @@
+
+#id0 video {
+  background-image: url(../img/id0.jpg);
+}
+
+#id1 video {
+  background-image: url(../img/id1.jpg);
+}
+
+#id2 video {
+  background-image: url(../img/id2.jpg);
+}
+
+#id3 video {
+  background-image: url(../img/id3.jpg);
+}
+
+#id4 video {
+  background-image: url(../img/id4.jpg);
+}
+
+#id5 video {
+  background-image: url(../img/id5.jpg);
+}
+
+#myVideoID video {
+  background-image: url(../img/id6.jpg);
+}
+
+.style-video  {
+      background-size: cover;
+      background-position: center;
+}
+
+
+
+.Room-wrap[data-video="S"] #side_id0 > video {
+  background-image: url(../img/id0.jpg);
+}
+
+.Room-wrap[data-video="S"] #side_id1 > video {
+  background-image: url(../img/id1.jpg);
+}
+
+.Room-wrap[data-video="S"] #side_id2 > video {
+  background-image: url(../img/id2.jpg);
+}
+
+.Room-wrap[data-video="S"] #side_id3 > video {
+  background-image: url(../img/id3.jpg);
+}
+
+.Room-wrap[data-video="S"] #side_myVideoID > video {
+  background-image: url(../img/id4.jpg);
+}
+
+.Room-wrap[data-video="S"] #group-videos .side_style-video{
+  background-size: cover;
+  background-position: center;
+}
+
+.self-rangeB3 {
+  display: none!important;
+}
+.self-rangeD {
+  display: none!important;
+}
+#my-rangeD.self-rangeD {
+  display: block!important;
+}
+.group-style p{
+  display: none!important;
+  
+}
